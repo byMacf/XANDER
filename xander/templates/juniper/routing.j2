@@ -1,0 +1,43 @@
+{% if protocols.bgp -%}
+set routing-options autonomous-system {{protocols.bgp.asn}}
+{%- for bgp_group, bgp_group_config in protocols.bgp.groups.items() %}
+{%- for bgp_var_name, bgp_var_value in bgp_group_config.items() %}
+{% if bgp_var_name != 'neighbors' and bgp_var_name != 'family' -%}
+set protocols bgp {{bgp_group}} {{bgp_var_name}} {{bgp_var_value}}
+{%- endif -%}
+{%- if bgp_var_name == 'neighbors' -%}
+{% for neighbor, neighbor_config in bgp_var_value.items() -%}
+set protocols bgp {{bgp_group}} neighbor {{neighbor}} description {{neighbor_config['description']}}
+{%- endfor -%}
+{%- endif -%}
+{%- endfor -%}
+{% endfor -%}
+{%- endif -%}
+{%- if protocols.ospf %}
+{%- for area, area_config in protocols.ospf.areas.items() -%}
+{%- if area_config['maximum-lsa'] -%}
+set protocols ospf area {{area}} maximum-lsa {{area_config['maximum-lsa']}}
+{%- endif %}
+{%- for interface, interface_config in area_config.interfaces.items() -%}
+{%- if interface_config['passive'] == True -%}
+set protocols ospf area {{area}} interface {{interface}} passive
+{% endif %}
+{%- if interface_config['metric'] -%}
+set protocols ospf area {{area}} interface {{interface}} metric {{interface_config['metric']}}
+{% endif %}
+{%- if interface_config['interface-type'] -%}
+set protocols ospf area {{area}} interface {{interface}} interface-type {{interface_config['interface-type']}}
+{% endif %}
+{%- endfor -%}
+{%- endfor -%}
+{% endif %}
+{%- if protocols.mpls %}
+{%- for interface in protocols.mpls.interfaces -%}
+set protocols mpls interface {{interface}}
+{% endfor -%}
+{% endif %}
+{%- if protocols.ldp %}
+{%- for interface in protocols.ldp.interfaces -%}
+set protocols ldp interface {{interface}}
+{% endfor -%}
+{% endif %}

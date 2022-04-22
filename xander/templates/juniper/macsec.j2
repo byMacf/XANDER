@@ -1,0 +1,20 @@
+{% if macsec %}
+{%- for keychain, keychain_config in macsec.keychains.items() -%}
+{%- for key, key_config in keychain_config.items() -%}
+set security authentication-key-chains key-chain {{keychain}} {{key}} secret {{key_config['secret']}}
+set security authentication-key-chains key-chain {{keychain}} {{key}} key-name {{key_config['key-name']}}
+set security authentication-key-chains key-chain {{keychain}} {{key}} start-time {{key_config['start-time']}}
+{% endfor -%}
+{%- endfor -%}
+{%- for connectivity_association, connectivity_association_config in macsec.connectivity_associations.items() -%}
+set security macsec connectivity-association {{connectivity_association}} security-mode {{connectivity_association_config['security-mode']}}
+set security macsec connectivity-association {{connectivity_association}} cipher-suite {{connectivity_association_config['cipher-suite']}}
+set security macsec connectivity-association {{connectivity_association}} pre-shared-key-chain {{connectivity_association_config['pre-shared-key-chain']}}
+set security macsec connectivity-association {{connectivity_association}} mka transmit-interval {{connectivity_association_config['transmit-interval']}}
+{%- endfor %}
+{% for connectivity_association, connectivity_association_config in macsec.connectivity_associations.items() -%}
+{%- for interface in connectivity_association_config['interfaces'] -%}
+set security macsec interfaces {{interface}} connectivity-association {{connectivity_association}}
+{% endfor -%}
+{%- endfor -%}
+{% endif %}

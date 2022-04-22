@@ -1,0 +1,75 @@
+hostname: test-box-r1
+protocols: 
+  bgp:
+    asn: 65100
+    groups:
+      IBGP-RR-PEERS:
+        type: internal
+        description: 'Test-Peers'
+        local-address: 172.17.1.0
+        hold-time: 30
+        import: GLOBAL-BGP
+        export: GLOBAL-BGP
+        cluster: 60.60.1.1
+        family:
+          inet: unicast
+          inet-vpn: unicast
+        neighbors:
+          172.17.1.1:
+            description: 'test-box-r2'
+          172.17.1.2:
+            description: 'test-box-r3'
+  ospf:
+    areas:
+      0:
+        interfaces:
+          lo0.0:
+            passive: True
+            metric: 1
+          xe-0/0/0.0:
+            interface-type: p2p
+            metric: 100
+          et-0/0/0.0:
+            interface-type: p2p
+            metric: 100
+        maximum-lsa: 10000
+  mpls:
+    interfaces: ['lo0.0', 'xe-0/0/0.0', 'et-0/0/0.0']
+  ldp:
+    interfaces: ['lo0.0', 'xe-0/0/0.0', 'et-0/0/0.0']
+interfaces: 
+  lo0.0:
+    description: loopback
+    family: inet
+    ip_address: 8.8.8.8/32
+  lo0.10:
+    description: loopback
+    family: inet
+    ip_address: 9.9.9.9/32
+  xe-0/0/0.0:
+    description: test1
+    family: inet
+    ip_address: 192.168.1.1/31
+    mtu: 9192
+  et-0/0/0.0:
+    description: test2
+    family: inet
+    ip_address: 192.168.2.1/31
+macsec:
+  keychains:
+    TEST-KEYCHAIN:
+      key 1:
+        secret: BLAH
+        key-name: INITIAL-KEY
+        start-time: "2022-01-01.00:00:00 +0000"
+      key 2:
+        secret: BLAHBLAH
+        key-name: INITIAL-KEY-2
+        start-time: "2022-02-02.00:00:00 +0000"
+  connectivity_associations:
+    TEST-WAN:
+      security-mode: static-cak
+      cipher-suite: gcm-aes-xpn-256
+      pre-shared-key-chain: TEST-KEYCHAIN
+      transmit-interval: 6000
+      interfaces: ['et-0/0/0', 'et-0/0/1']
