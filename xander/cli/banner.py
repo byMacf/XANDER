@@ -10,4 +10,5 @@ def banner():
     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
 
     xander; v1.0
+    A modular network device configuration builder.
     ''')
