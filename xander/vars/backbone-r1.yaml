@@ -73,3 +73,10 @@ macsec:
       pre-shared-key-chain: TEST-KEYCHAIN
       transmit-interval: 6000
       interfaces: ['et-0/0/0', 'et-0/0/1']
+policies:
+  TEST-POLICY1:
+    ALLOW-L3-VPN: 
+      from: ['family inet-vpn', 'protocol bgp']
+      then: ['accept']
+    DENY-ALL: 
+      then: ['reject']

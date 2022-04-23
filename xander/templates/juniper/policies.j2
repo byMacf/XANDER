@@ -1,0 +1,14 @@
+{% if policies %}
+    {% for policy, policy_terms in policies.items() -%}
+        {% for policy_term, policy_config in policy_terms.items() %}
+            {% if policy_config.from %}
+                {% for from_item in policy_config.from -%}
+                    set policy-options policy-statement {{policy}} term {{policy_term}} from {{from_item}}
+                {% endfor %}
+            {% endif %}
+            {% for then_item in policy_config.then -%}
+                set policy-options policy-statement {{policy}} term {{policy_term}} then {{then_item}}
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+{% endif %}

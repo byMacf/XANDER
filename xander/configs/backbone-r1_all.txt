@@ -19,6 +19,10 @@ set security macsec connectivity-association TEST-WAN pre-shared-key-chain TEST-
 set security macsec connectivity-association TEST-WAN mka transmit-interval 6000
 set security macsec interfaces et-0/0/0 connectivity-association TEST-WAN
 set security macsec interfaces et-0/0/1 connectivity-association TEST-WAN
+set policy-options policy-statement TEST-POLICY1 term ALLOW-L3-VPN from family inet-vpn
+set policy-options policy-statement TEST-POLICY1 term ALLOW-L3-VPN from protocol bgp
+set policy-options policy-statement TEST-POLICY1 term ALLOW-L3-VPN then accept
+set policy-options policy-statement TEST-POLICY1 term DENY-ALL then reject
 set routing-options autonomous-system 65100
 set protocols bgp IBGP-RR-PEERS type internal
 set protocols bgp IBGP-RR-PEERS description Test-Peers
