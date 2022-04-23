@@ -11,4 +11,7 @@
             {% endfor %}
         {% endfor %}
     {% endfor %}
+    {% for community_name, community in policies.communities.items() -%}
+        set policy-options community {{community_name}} members {{community}}
+    {% endfor %}
 {% endif %}

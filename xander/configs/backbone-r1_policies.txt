@@ -2,3 +2,5 @@ set policy-options policy-statement TEST-POLICY1 term ALLOW-L3-VPN from family i
 set policy-options policy-statement TEST-POLICY1 term ALLOW-L3-VPN from protocol bgp
 set policy-options policy-statement TEST-POLICY1 term ALLOW-L3-VPN then accept
 set policy-options policy-statement TEST-POLICY1 term DENY-ALL then reject
+set policy-options community COMM-1 members 64901:500
+set policy-options community COMM-2 members 64901:250

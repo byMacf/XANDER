@@ -135,3 +135,6 @@ policies:
       then: ['accept']
     DENY-ALL: 
       then: ['reject']
+  communities:
+    COMM-1: 64901:500
+    COMM-2: 64901:250
