@@ -27,17 +27,17 @@ def build(device, vendor, section):
 
 	if section in section_list:
 		template = template_path.get_template(section + '.j2')
-		result = template.render(device_vars)
+		built_config = template.render(device_vars)
 
 		with open('/Users/dom/Documents/Py/XANDER/xander/configs/' + device + '_' + section + '.txt', 'w') as built_config_file:
-			built_config_file.write(result)
+			built_config_file.write(built_config)
 	else:
 		for section in section_list:
 			template = template_path.get_template(section + '.j2')
-			result = template.render(device_vars)
+			built_config = template.render(device_vars)
 
 			with open('/Users/dom/Documents/Py/XANDER/xander/configs/' + device + '_all.txt', 'a') as built_config_file:
-				built_config_file.write(result)
+				built_config_file.write(built_config)
 
 @click.group(short_help = 'Configuration commands')
 def config():
