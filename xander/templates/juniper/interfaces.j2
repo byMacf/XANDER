@@ -1,9 +1,9 @@
 {% if interfaces %}
-{%- for interface_name, interface_config in interfaces.items() -%}
-set interfaces {{interface_name}} family {{interface_config['family']}} address {{interface_config['ip_address']}}
-{% if interface_config['mtu'] -%}
-set interfaces {{interface_name}} family {{interface_config['family']}} mtu {{interface_config['mtu']}}
-{% endif -%}
-set interfaces {{interface_name}} description '{{interface_config['description']}}'
-{% endfor -%}
+    {% for interface_name, interface_config in interfaces.items() -%}
+        set interfaces {{interface_name}} family {{interface_config['family']}} address {{interface_config['ip_address']}}
+        {% if interface_config['mtu'] -%}
+            set interfaces {{interface_name}} family {{interface_config['family']}} mtu {{interface_config['mtu']}}
+        {% endif -%}
+        set interfaces {{interface_name}} description '{{interface_config['description']}}'
+    {% endfor %}
 {% endif %}

@@ -22,21 +22,21 @@ def build(device, vendor, section):
 	if not section:
 		section = 'all'
 
-	template_path = Environment(loader=FileSystemLoader('/Users/dom/Documents/Py/xander-master/xander/templates/' + vendor))
-	device_vars = yaml.load(open('/Users/dom/Documents/Py/xander-master/xander/vars/' + device + '.yaml'), Loader=yaml.SafeLoader)
+	template_path = Environment(loader=FileSystemLoader('/Users/dom/Documents/Py/XANDER/xander/templates/' + vendor), trim_blocks=True, lstrip_blocks=True)
+	device_vars = yaml.load(open('/Users/dom/Documents/Py/XANDER/xander/vars/' + device + '.yaml'), Loader=yaml.SafeLoader)
 
 	if section in section_list:
 		template = template_path.get_template(section + '.j2')
 		result = template.render(device_vars)
 
-		with open('/Users/dom/Documents/Py/xander-master/xander/configs/' + device + '_' + section + '.txt', 'w') as built_config_file:
+		with open('/Users/dom/Documents/Py/XANDER/xander/configs/' + device + '_' + section + '.txt', 'w') as built_config_file:
 			built_config_file.write(result)
 	else:
 		for section in section_list:
 			template = template_path.get_template(section + '.j2')
 			result = template.render(device_vars)
 
-			with open('/Users/dom/Documents/Py/xander-master/xander/configs/' + device + '_all.txt', 'a') as built_config_file:
+			with open('/Users/dom/Documents/Py/XANDER/xander/configs/' + device + '_all.txt', 'a') as built_config_file:
 				built_config_file.write(result)
 
 @click.group(short_help = 'Configuration commands')
