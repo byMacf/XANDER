@@ -4,9 +4,9 @@ import yaml
 from jinja2 import Environment, FileSystemLoader
 
 @click.command(short_help = 'Build a configuration')
-@click.option('-d', '--device', help='Device', required = True)
-@click.option('-v', '--vendor', help='Vendor', required = False)
-@click.option('-s', '--section', help='Section', required = False)
+@click.option('-d', '--device', help='Device Name', required = True)
+@click.option('-v', '--vendor', help='Device Vendor', required = False)
+@click.option('-s', '--section', type = click.Choice(['all', 'acls', 'interfaces', 'macsec', 'policies', 'routing', 'system']), help='Configuration Section To Render', required = False)
 def build(device, vendor, section):
 	'''
 	Summary:
