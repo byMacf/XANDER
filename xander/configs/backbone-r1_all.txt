@@ -1,0 +1,45 @@
+set interfaces lo0.0 family inet address 8.8.8.8/32
+set interfaces lo0.0 description 'loopback'
+set interfaces lo0.10 family inet address 9.9.9.9/32
+set interfaces lo0.10 description 'loopback'
+set interfaces xe-0/0/0.0 family inet address 192.168.1.1/31
+set interfaces xe-0/0/0.0 family inet mtu 9192
+set interfaces xe-0/0/0.0 description 'test1'
+set interfaces et-0/0/0.0 family inet address 192.168.2.1/31
+set interfaces et-0/0/0.0 description 'test2'
+set security authentication-key-chains key-chain TEST-KEYCHAIN key 1 secret BLAH
+set security authentication-key-chains key-chain TEST-KEYCHAIN key 1 key-name INITIAL-KEY
+set security authentication-key-chains key-chain TEST-KEYCHAIN key 1 start-time 2022-01-01.00:00:00 +0000
+set security authentication-key-chains key-chain TEST-KEYCHAIN key 2 secret BLAHBLAH
+set security authentication-key-chains key-chain TEST-KEYCHAIN key 2 key-name INITIAL-KEY-2
+set security authentication-key-chains key-chain TEST-KEYCHAIN key 2 start-time 2022-02-02.00:00:00 +0000
+set security macsec connectivity-association TEST-WAN security-mode static-cak
+set security macsec connectivity-association TEST-WAN cipher-suite gcm-aes-xpn-256
+set security macsec connectivity-association TEST-WAN pre-shared-key-chain TEST-KEYCHAIN
+set security macsec connectivity-association TEST-WAN mka transmit-interval 6000
+set security macsec interfaces et-0/0/0 connectivity-association TEST-WAN
+set security macsec interfaces et-0/0/1 connectivity-association TEST-WAN
+set routing-options autonomous-system 65100
+set protocols bgp IBGP-RR-PEERS type internal
+set protocols bgp IBGP-RR-PEERS description Test-Peers
+set protocols bgp IBGP-RR-PEERS local-address 172.17.1.0
+set protocols bgp IBGP-RR-PEERS hold-time 30
+set protocols bgp IBGP-RR-PEERS import GLOBAL-BGP
+set protocols bgp IBGP-RR-PEERS export GLOBAL-BGP
+set protocols bgp IBGP-RR-PEERS cluster 60.60.1.1
+set protocols bgp IBGP-RR-PEERS neighbor 172.17.1.1 description backbone-r2
+set protocols bgp IBGP-RR-PEERS neighbor 172.17.1.2 description backbone-r3
+set protocols ospf area 0 maximum-lsa 10000
+set protocols ospf area 0 interface lo0.0 passive
+set protocols ospf area 0 interface lo0.0 metric 1
+set protocols ospf area 0 interface xe-0/0/0.0 metric 100
+set protocols ospf area 0 interface xe-0/0/0.0 interface-type p2p
+set protocols ospf area 0 interface et-0/0/0.0 metric 100
+set protocols ospf area 0 interface et-0/0/0.0 interface-type p2p
+set protocols mpls interface lo0.0
+set protocols mpls interface xe-0/0/0.0
+set protocols mpls interface et-0/0/0.0
+set protocols ldp interface lo0.0
+set protocols ldp interface xe-0/0/0.0
+set protocols ldp interface et-0/0/0.0
+set system host-name backbone-r1

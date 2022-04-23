@@ -1,4 +1,4 @@
-hostname: test-box-r1
+hostname: backbone-r1
 protocols: 
   bgp:
     asn: 65100
@@ -16,9 +16,9 @@ protocols:
           inet-vpn: unicast
         neighbors:
           172.17.1.1:
-            description: 'test-box-r2'
+            description: 'backbone-r2'
           172.17.1.2:
-            description: 'test-box-r3'
+            description: 'backbone-r3'
   ospf:
     areas:
       0:

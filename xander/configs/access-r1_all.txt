@@ -1,0 +1,27 @@
+set interfaces lo0.0 family inet address 8.8.8.8/32
+set interfaces lo0.0 description 'loopback'
+set interfaces xe-0/0/0.0 family inet address 192.168.1.1/31
+set interfaces xe-0/0/0.0 family inet mtu 9192
+set interfaces xe-0/0/0.0 description 'test1'
+set interfaces et-0/0/0.0 family inet address 192.168.2.1/31
+set interfaces et-0/0/0.0 description 'test2'
+set protocols ospf area 0 maximum-lsa 10000set protocols ospf area 0 interface lo0.0 passive
+set protocols ospf area 0 interface lo0.0 metric 1
+set protocols ospf area 0 interface xe-0/0/0.0 metric 100
+set protocols ospf area 0 interface xe-0/0/0.0 interface-type p2p
+set protocols ospf area 0 interface et-0/0/0.0 metric 100
+set protocols ospf area 0 interface et-0/0/0.0 interface-type p2p
+set system host-name access-r1set interfaces lo0.0 family inet address 8.8.8.8/32
+set interfaces lo0.0 description 'loopback'
+set interfaces xe-0/0/0.0 family inet address 192.168.1.1/31
+set interfaces xe-0/0/0.0 family inet mtu 9192
+set interfaces xe-0/0/0.0 description 'test1'
+set interfaces et-0/0/0.0 family inet address 192.168.2.1/31
+set interfaces et-0/0/0.0 description 'test2'
+set protocols ospf area 0 maximum-lsa 10000set protocols ospf area 0 interface lo0.0 passive
+set protocols ospf area 0 interface lo0.0 metric 1
+set protocols ospf area 0 interface xe-0/0/0.0 metric 100
+set protocols ospf area 0 interface xe-0/0/0.0 interface-type p2p
+set protocols ospf area 0 interface et-0/0/0.0 metric 100
+set protocols ospf area 0 interface et-0/0/0.0 interface-type p2p
+set system host-name access-r1

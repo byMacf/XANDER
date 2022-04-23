@@ -1,0 +1,30 @@
+hostname: access-r1
+protocols: 
+  ospf:
+    areas:
+      0:
+        interfaces:
+          lo0.0:
+            passive: True
+            metric: 1
+          xe-0/0/0.0:
+            interface-type: p2p
+            metric: 100
+          et-0/0/0.0:
+            interface-type: p2p
+            metric: 100
+        maximum-lsa: 10000
+interfaces: 
+  lo0.0:
+    description: loopback
+    family: inet
+    ip_address: 8.8.8.8/32
+  xe-0/0/0.0:
+    description: test1
+    family: inet
+    ip_address: 192.168.1.1/31
+    mtu: 9192
+  et-0/0/0.0:
+    description: test2
+    family: inet
+    ip_address: 192.168.2.1/31
