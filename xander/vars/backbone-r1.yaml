@@ -22,6 +22,8 @@ protocols:
             description: 'backbone-r3'
             authentication-key: KEY-R3
   ospf:
+    import: OSPF-IN
+    export: OSPF-OUT
     areas:
       0:
         interfaces:
@@ -41,6 +43,55 @@ protocols:
     interfaces: ['lo0.0', 'xe-0/0/0.0', 'et-0/0/0.0']
   ldp:
     interfaces: ['lo0.0', 'xe-0/0/0.0', 'et-0/0/0.0']
+vrfs:
+  TEST-VRF:
+    type: vrf
+    interfaces: ['et-0/0/2.0', 'et-0/0/3.0']
+    route_distinguisher: 65100:1000
+    import: VRF-IMPORT
+    export: VRF-EXPORT
+    routing_options: 
+      static:
+        route: 0.0.0.0/0
+        options: ['discard', 'no-install']
+    aggregate: 192.168.0.0/20
+    router-id: 192.168.0.0
+    bgp:
+      groups:
+        FW:
+          type: external
+          description: 'Test-Peers'
+          peer-as: 64900
+          local-address: 192.168.0.46
+          hold-time: 30
+          import: BGP-IN
+          export: BGP-OUT
+          hold-time: 30
+          neighbors:
+            172.17.1.1:
+              description: 'backbone-r2'
+              authentication-key: KEY-R2
+            172.17.1.2:
+              description: 'backbone-r3'
+              authentication-key: KEY-R3
+    ospf:
+      import: OSPF-IN
+      export: OSPF-OUT
+      areas:
+        0:
+          interfaces:
+            lo0.0:
+              passive: True
+              metric: 1
+            xe-0/0/0.0:
+              interface-type: p2p
+              metric: 100
+              authentication-key: KEY-1
+            et-0/0/0.0:
+              interface-type: p2p
+              metric: 100
+              authentication-key: KEY-2
+          maximum-lsa: 10000
 interfaces: 
   lo0.0:
     description: loopback

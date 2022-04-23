@@ -10,6 +10,8 @@ set protocols bgp IBGP-RR-PEERS neighbor 172.17.1.1 description backbone-r2
 set protocols bgp IBGP-RR-PEERS neighbor 172.17.1.1 authentication-key KEY-R2
 set protocols bgp IBGP-RR-PEERS neighbor 172.17.1.2 description backbone-r3
 set protocols bgp IBGP-RR-PEERS neighbor 172.17.1.2 authentication-key KEY-R3
+set protocols ospf import OSPF-IN
+set protocols ospf export OSPF-OUT
 set protocols ospf area 0 maximum-lsa 10000
 set protocols ospf area 0 interface lo0.0 passive
 set protocols ospf area 0 interface lo0.0 metric 1
@@ -25,3 +27,35 @@ set protocols mpls interface et-0/0/0.0
 set protocols ldp interface lo0.0
 set protocols ldp interface xe-0/0/0.0
 set protocols ldp interface et-0/0/0.0
+set routing-instances TEST-VRF vrf-table-label
+set routing-instances TEST-VRF instance-type vrf
+set routing-instances TEST-VRF interface et-0/0/2.0
+set routing-instances TEST-VRF interface et-0/0/3.0
+set routing-instances TEST-VRF route-distinguisher 65100:1000
+set routing-instances TEST-VRF vrf-import VRF-IMPORT
+set routing-instances TEST-VRF vrf-export VRF-EXPORT
+set routing-instances TEST-VRF routing-options static route 0.0.0.0/0 discard no-install 
+set routing-instances TEST-VRF aggregate 192.168.0.0/20
+set routing-instances TEST-VRF router-id 192.168.0.0
+set routing-instances TEST-VRF protocols ospf import OSPF-IN
+set routing-instances TEST-VRF protocols ospf export OSPF-OUT
+set routing-instances TEST-VRF protocols ospf area 0 maximum-lsa 10000
+set routing-instances TEST-VRF protocols ospf area 0 interface lo0.0 passive
+set routing-instances TEST-VRF protocols ospf area 0 interface lo0.0 metric 1
+set routing-instances TEST-VRF protocols ospf area 0 interface xe-0/0/0.0 metric 100
+set routing-instances TEST-VRF protocols ospf area 0 interface xe-0/0/0.0 interface-type p2p
+set routing-instances TEST-VRF protocols ospf area 0 interface xe-0/0/0.0 authentication md5 1 key KEY-1
+set routing-instances TEST-VRF protocols ospf area 0 interface et-0/0/0.0 metric 100
+set routing-instances TEST-VRF protocols ospf area 0 interface et-0/0/0.0 interface-type p2p
+set routing-instances TEST-VRF protocols ospf area 0 interface et-0/0/0.0 authentication md5 1 key KEY-2
+set routing-instances TEST-VRF protocols bgp FW type external
+set routing-instances TEST-VRF protocols bgp FW description Test-Peers
+set routing-instances TEST-VRF protocols bgp FW peer-as 64900
+set routing-instances TEST-VRF protocols bgp FW local-address 192.168.0.46
+set routing-instances TEST-VRF protocols bgp FW hold-time 30
+set routing-instances TEST-VRF protocols bgp FW import BGP-IN
+set routing-instances TEST-VRF protocols bgp FW export BGP-OUT
+set routing-instances TEST-VRF protocols bgp FW neighbor 172.17.1.1 description backbone-r2
+set routing-instances TEST-VRF protocols bgp FW neighbor 172.17.1.1 authentication-key KEY-R2
+set routing-instances TEST-VRF protocols bgp FW neighbor 172.17.1.2 description backbone-r3
+set routing-instances TEST-VRF protocols bgp FW neighbor 172.17.1.2 authentication-key KEY-R3
