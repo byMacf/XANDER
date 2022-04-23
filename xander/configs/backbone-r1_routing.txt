@@ -7,14 +7,18 @@ set protocols bgp IBGP-RR-PEERS import GLOBAL-BGP
 set protocols bgp IBGP-RR-PEERS export GLOBAL-BGP
 set protocols bgp IBGP-RR-PEERS cluster 60.60.1.1
 set protocols bgp IBGP-RR-PEERS neighbor 172.17.1.1 description backbone-r2
+set protocols bgp IBGP-RR-PEERS neighbor 172.17.1.1 authentication-key KEY-R2
 set protocols bgp IBGP-RR-PEERS neighbor 172.17.1.2 description backbone-r3
+set protocols bgp IBGP-RR-PEERS neighbor 172.17.1.2 authentication-key KEY-R3
 set protocols ospf area 0 maximum-lsa 10000
 set protocols ospf area 0 interface lo0.0 passive
 set protocols ospf area 0 interface lo0.0 metric 1
 set protocols ospf area 0 interface xe-0/0/0.0 metric 100
 set protocols ospf area 0 interface xe-0/0/0.0 interface-type p2p
+set protocols ospf area 0 interface xe-0/0/0.0 authentication md5 1 key KEY-1
 set protocols ospf area 0 interface et-0/0/0.0 metric 100
 set protocols ospf area 0 interface et-0/0/0.0 interface-type p2p
+set protocols ospf area 0 interface et-0/0/0.0 authentication md5 1 key KEY-2
 set protocols mpls interface lo0.0
 set protocols mpls interface xe-0/0/0.0
 set protocols mpls interface et-0/0/0.0

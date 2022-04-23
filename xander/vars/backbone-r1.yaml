@@ -17,8 +17,10 @@ protocols:
         neighbors:
           172.17.1.1:
             description: 'backbone-r2'
+            authentication-key: KEY-R2
           172.17.1.2:
             description: 'backbone-r3'
+            authentication-key: KEY-R3
   ospf:
     areas:
       0:
@@ -29,9 +31,11 @@ protocols:
           xe-0/0/0.0:
             interface-type: p2p
             metric: 100
+            authentication-key: KEY-1
           et-0/0/0.0:
             interface-type: p2p
             metric: 100
+            authentication-key: KEY-2
         maximum-lsa: 10000
   mpls:
     interfaces: ['lo0.0', 'xe-0/0/0.0', 'et-0/0/0.0']

@@ -8,6 +8,9 @@
             {% if bgp_var_name == 'neighbors' %}
                 {% for neighbor, neighbor_config in bgp_var_value.items() -%}
                     set protocols bgp {{bgp_group}} neighbor {{neighbor}} description {{neighbor_config['description']}}
+                    {% if neighbor_config['authentication-key'] -%}
+                        set protocols bgp {{bgp_group}} neighbor {{neighbor}} authentication-key {{neighbor_config['authentication-key']}}
+                    {% endif %}
                 {% endfor %}
             {% endif %}
         {% endfor %}
@@ -27,6 +30,9 @@
             {% endif %}
             {% if interface_config['interface-type'] -%}
                 set protocols ospf area {{area}} interface {{interface}} interface-type {{interface_config['interface-type']}}
+            {% endif %}
+            {% if interface_config['authentication-key'] -%}
+                set protocols ospf area {{area}} interface {{interface}} authentication md5 1 key {{interface_config['authentication-key']}}
             {% endif %}
         {% endfor %}
     {% endfor %}
