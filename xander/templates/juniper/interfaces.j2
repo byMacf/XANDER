@@ -5,5 +5,8 @@
             set interfaces {{interface_name}} family {{interface_config['family']}} mtu {{interface_config['mtu']}}
         {% endif -%}
         set interfaces {{interface_name}} description '{{interface_config['description']}}'
+        {% if interface_config['mpls'] -%}
+            set interfaces {{interface_name}} family mpls
+        {% endif %}
     {% endfor %}
 {% endif %}
