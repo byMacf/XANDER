@@ -1,2 +1,8 @@
-set system host-name {{hostname}}
-set system ntp server {{ntp_server}}
+{% if system %}
+    {% if system.hostname -%}
+        set system host-name {{system.hostname}}
+    {% endif %}
+    {% if system.ntp_server -%}
+        set system ntp server {{system.ntp_server}}
+    {% endif %}
+{% endif %}
