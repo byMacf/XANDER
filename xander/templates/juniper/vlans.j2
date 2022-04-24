@@ -1,0 +1,5 @@
+{% for vlan, vlan_config in vlans.items() %}
+    {% for vlan_var_name, vlan_var_value in vlan_config.items() -%}
+        set vlans {{vlan}} {{vlan_var_name}} {{vlan_var_value}}
+    {% endfor %}
+{% endfor %}
