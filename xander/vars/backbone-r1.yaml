@@ -1,4 +1,6 @@
-hostname: backbone-r1
+system:
+  hostname: backbone-r1
+  ntp_server: x.x.x.x/32
 protocols: 
   bgp:
     asn: 65100
@@ -22,6 +24,7 @@ protocols:
             description: 'backbone-r3'
             authentication-key: KEY-R3
   ospf:
+    maximum-lsa: 10000
     import: OSPF-IN
     export: OSPF-OUT
     areas:
@@ -38,7 +41,6 @@ protocols:
             interface-type: p2p
             metric: 100
             authentication-key: KEY-2
-        maximum-lsa: 10000
   mpls:
     interfaces: ['lo0.0', 'xe-0/0/0.0', 'et-0/0/0.0']
   ldp:
