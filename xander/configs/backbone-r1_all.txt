@@ -7,18 +7,6 @@ set interfaces xe-0/0/0.0 family inet mtu 9192
 set interfaces xe-0/0/0.0 description 'test1'
 set interfaces et-0/0/0.0 family inet address 192.168.2.1/31
 set interfaces et-0/0/0.0 description 'test2'
-set security authentication-key-chains key-chain TEST-KEYCHAIN key 1 secret BLAH
-set security authentication-key-chains key-chain TEST-KEYCHAIN key 1 key-name INITIAL-KEY
-set security authentication-key-chains key-chain TEST-KEYCHAIN key 1 start-time 2022-01-01.00:00:00 +0000
-set security authentication-key-chains key-chain TEST-KEYCHAIN key 2 secret BLAHBLAH
-set security authentication-key-chains key-chain TEST-KEYCHAIN key 2 key-name INITIAL-KEY-2
-set security authentication-key-chains key-chain TEST-KEYCHAIN key 2 start-time 2022-02-02.00:00:00 +0000
-set security macsec connectivity-association TEST-WAN security-mode static-cak
-set security macsec connectivity-association TEST-WAN cipher-suite gcm-aes-xpn-256
-set security macsec connectivity-association TEST-WAN pre-shared-key-chain TEST-KEYCHAIN
-set security macsec connectivity-association TEST-WAN mka transmit-interval 6000
-set security macsec interfaces et-0/0/0 connectivity-association TEST-WAN
-set security macsec interfaces et-0/0/1 connectivity-association TEST-WAN
 set policy-options policy-statement TEST-POLICY1 term ALLOW-L3-VPN from family inet-vpn
 set policy-options policy-statement TEST-POLICY1 term ALLOW-L3-VPN from protocol bgp
 set policy-options policy-statement TEST-POLICY1 term ALLOW-L3-VPN then accept
@@ -39,7 +27,6 @@ set protocols bgp IBGP-RR-PEERS neighbor 172.17.1.2 description backbone-r3
 set protocols bgp IBGP-RR-PEERS neighbor 172.17.1.2 authentication-key KEY-R3
 set protocols ospf import OSPF-IN
 set protocols ospf export OSPF-OUT
-set protocols ospf area 0 maximum-lsa 10000
 set protocols ospf area 0 interface lo0.0 passive
 set protocols ospf area 0 interface lo0.0 metric 1
 set protocols ospf area 0 interface xe-0/0/0.0 metric 100
@@ -66,7 +53,6 @@ set routing-instances TEST-VRF aggregate 192.168.0.0/20
 set routing-instances TEST-VRF router-id 192.168.0.0
 set routing-instances TEST-VRF protocols ospf import OSPF-IN
 set routing-instances TEST-VRF protocols ospf export OSPF-OUT
-set routing-instances TEST-VRF protocols ospf area 0 maximum-lsa 10000
 set routing-instances TEST-VRF protocols ospf area 0 interface lo0.0 passive
 set routing-instances TEST-VRF protocols ospf area 0 interface lo0.0 metric 1
 set routing-instances TEST-VRF protocols ospf area 0 interface xe-0/0/0.0 metric 100
@@ -86,4 +72,17 @@ set routing-instances TEST-VRF protocols bgp FW neighbor 172.17.1.1 description 
 set routing-instances TEST-VRF protocols bgp FW neighbor 172.17.1.1 authentication-key KEY-R2
 set routing-instances TEST-VRF protocols bgp FW neighbor 172.17.1.2 description backbone-r3
 set routing-instances TEST-VRF protocols bgp FW neighbor 172.17.1.2 authentication-key KEY-R3
+set security authentication-key-chains key-chain TEST-KEYCHAIN key 1 secret BLAH
+set security authentication-key-chains key-chain TEST-KEYCHAIN key 1 key-name INITIAL-KEY
+set security authentication-key-chains key-chain TEST-KEYCHAIN key 1 start-time 2022-01-01.00:00:00 +0000
+set security authentication-key-chains key-chain TEST-KEYCHAIN key 2 secret BLAHBLAH
+set security authentication-key-chains key-chain TEST-KEYCHAIN key 2 key-name INITIAL-KEY-2
+set security authentication-key-chains key-chain TEST-KEYCHAIN key 2 start-time 2022-02-02.00:00:00 +0000
+set security macsec connectivity-association TEST-WAN security-mode static-cak
+set security macsec connectivity-association TEST-WAN cipher-suite gcm-aes-xpn-256
+set security macsec connectivity-association TEST-WAN pre-shared-key-chain TEST-KEYCHAIN
+set security macsec connectivity-association TEST-WAN mka transmit-interval 6000
+set security macsec interfaces et-0/0/0 connectivity-association TEST-WAN
+set security macsec interfaces et-0/0/1 connectivity-association TEST-WAN
 set system host-name backbone-r1
+set system ntp server x.x.x.x/32

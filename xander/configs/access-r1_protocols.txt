@@ -1,16 +1,3 @@
-set access radius-server 192.168.15.5 secret SECRET-HERE
-set access radius-server 192.168.15.5 source-address 192.168.15.254
-set profile 802.1x_test authentication-order radius password
-set profile 802.1x_test radius authentication-server 192.168.15.5
-set interfaces lo0.0 family inet address 8.8.8.8/32
-set interfaces lo0.0 description 'loopback'
-set interfaces xe-0/0/0.0 family inet address 192.168.1.1/31
-set interfaces xe-0/0/0.0 family inet mtu 9192
-set interfaces xe-0/0/0.0 description 'test1'
-set interfaces et-0/0/0.0 family inet address 192.168.2.1/31
-set interfaces et-0/0/0.0 description 'test2'
-set interfaces irb.88 family inet address 192.168.18.254/24
-set interfaces irb.88 description 'Test VLAN'
 set protocols ospf area 0 maximum-lsa 10000
 set protocols ospf area 0 interface lo0.0 passive
 set protocols ospf area 0 interface lo0.0 metric 1
@@ -28,6 +15,3 @@ set protocols dot1x authenticator interface ge-0/0/42.0 supplicant-timeout 30
 set protocols dot1x authenticator interface ge-0/0/42.0 server-timeout 30
 set protocols dot1x authenticator interface ge-0/0/42.0 maximum-requests 3
 set protocols dot1x authenticator interface ge-0/0/42.0 server-fail deny
-set system host-name access-r1
-set system ntp server set vlans test-vlan vlan-id 88
-set vlans test-vlan l3-interface irb.88

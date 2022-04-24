@@ -1,0 +1,4 @@
+set access radius-server 192.168.15.5 secret SECRET-HERE
+set access radius-server 192.168.15.5 source-address 192.168.15.254
+set profile 802.1x_test authentication-order radius password
+set profile 802.1x_test radius authentication-server 192.168.15.5

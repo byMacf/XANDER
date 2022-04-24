@@ -1,0 +1,2 @@
+gitset system host-name access-r1
+set system ntp server x.x.x.x/32

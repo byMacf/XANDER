@@ -1,0 +1,2 @@
+set system host-name backbone-r1
+set system ntp server x.x.x.x/32

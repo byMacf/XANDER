@@ -12,7 +12,6 @@ set protocols bgp IBGP-RR-PEERS neighbor 172.17.1.2 description backbone-r3
 set protocols bgp IBGP-RR-PEERS neighbor 172.17.1.2 authentication-key KEY-R3
 set protocols ospf import OSPF-IN
 set protocols ospf export OSPF-OUT
-set protocols ospf area 0 maximum-lsa 10000
 set protocols ospf area 0 interface lo0.0 passive
 set protocols ospf area 0 interface lo0.0 metric 1
 set protocols ospf area 0 interface xe-0/0/0.0 metric 100
@@ -39,7 +38,6 @@ set routing-instances TEST-VRF aggregate 192.168.0.0/20
 set routing-instances TEST-VRF router-id 192.168.0.0
 set routing-instances TEST-VRF protocols ospf import OSPF-IN
 set routing-instances TEST-VRF protocols ospf export OSPF-OUT
-set routing-instances TEST-VRF protocols ospf area 0 maximum-lsa 10000
 set routing-instances TEST-VRF protocols ospf area 0 interface lo0.0 passive
 set routing-instances TEST-VRF protocols ospf area 0 interface lo0.0 metric 1
 set routing-instances TEST-VRF protocols ospf area 0 interface xe-0/0/0.0 metric 100
