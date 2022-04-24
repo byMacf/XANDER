@@ -14,6 +14,19 @@ protocols:
             interface-type: p2p
             metric: 100
         maximum-lsa: 10000
+  dot1x:
+    authentication-profile-name: TEST
+    radius-options: use-vlan-id
+    interfaces:
+      ge-0/0/42.0:
+        supplicant: multiple
+        retries: 3
+        transmit-period: 10
+        reauthentication: 3600
+        supplicant-timeout: 30
+        server-timeout: 30
+        maximum-requests: 3
+        server-fail: deny
 interfaces: 
   lo0.0:
     description: loopback
@@ -29,7 +42,7 @@ interfaces:
     family: inet
     ip_address: 192.168.2.1/31
   irb.88:
-    description: Network Management VLAN
+    description: Test VLAN
     family: inet
     ip_address: 192.168.18.254/24
 vlans:
@@ -45,4 +58,3 @@ access:
     802.1x_test:
       authentication-order: radius password
       radius: authentication-server 192.168.15.5
-  

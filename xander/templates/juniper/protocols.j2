@@ -119,3 +119,15 @@ set routing-instances {{vrf}} protocols ospf maximum-lsa {{vrf_config.ospf.maxim
         {% endif %}
     {% endfor %}
 {% endif %}
+{% if protocols.dot1x %}
+    {% for dot1x_var_name, dot1x_var_value in protocols.dot1x.items() %}
+        {% if dot1x_var_name != 'interfaces' -%}
+            set protocols dot1x authenticator {{dot1x_var_name}} {{dot1x_var_value}}
+        {% endif %}
+    {% endfor %}
+    {% for interface, interface_config in protocols.dot1x.interfaces.items() %}
+        {% for interface_var_name, interface_var_value in interface_config.items() -%}
+            set protocols dot1x authenticator interface {{interface}} {{interface_var_name}} {{interface_var_value}}
+        {% endfor %}
+    {% endfor %}
+{% endif %}

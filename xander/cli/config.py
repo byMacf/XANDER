@@ -7,7 +7,7 @@ from jinja2 import Environment, FileSystemLoader
 @click.command(short_help = 'Build a configuration')
 @click.option('-d', '--device', help='Device Name', required = True)
 @click.option('-v', '--vendor', help='Device Vendor', required = False)
-@click.option('-s', '--section', type = click.Choice(['all', 'interfaces', 'policies', 'protocols', 'security', 'system', 'vlans']), help='Configuration Section To Render', required = False)
+@click.option('-s', '--section', type = click.Choice(['all', 'access', 'interfaces', 'policies', 'protocols', 'security', 'system', 'vlans']), help='Configuration Section To Render', required = False)
 def build(device, vendor, section):
 	'''
 	Summary:
@@ -17,7 +17,7 @@ def build(device, vendor, section):
 	name: Device to build configuration for
 	'''
 	ROOT_DIR = os.getcwd()
-	section_list = ['interfaces', 'policies', 'protocols', 'security', 'system', 'vlans']
+	section_list = ['access', 'interfaces', 'policies', 'protocols', 'security', 'system', 'vlans']
 
 	if not vendor:
 		vendor = 'juniper'

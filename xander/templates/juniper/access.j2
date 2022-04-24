@@ -1,0 +1,12 @@
+{% if access %}
+    {% for server, server_config in access.servers.items() %}
+        {% for server_var_name, server_var_value in server_config.items() -%}
+            set access radius-server {{server}} {{server_var_name}} {{server_var_value}}
+        {% endfor %}
+    {% endfor %}
+    {% for profile, profile_config in access.profiles.items() %}
+        {% for profile_var_name, profile_var_value in profile_config.items() -%}
+            set profile {{profile}} {{profile_var_name}} {{profile_var_value}}
+        {% endfor %}
+    {% endfor %}
+{% endif %}
