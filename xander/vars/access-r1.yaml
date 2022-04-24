@@ -36,3 +36,13 @@ vlans:
   net-mgmt-vlan:
     vlan-id: 88
     l3-interface: irb.88
+access:
+  servers:
+    192.168.15.5:
+      secret: SECRET-HERE
+      source-address: 192.168.15.254
+  profiles:
+    802.1x_test:
+      authentication-order: radius password
+      radius: authentication-server 192.168.15.5
+  

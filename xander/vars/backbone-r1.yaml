@@ -110,7 +110,7 @@ interfaces:
     description: test2
     family: inet
     ip_address: 192.168.2.1/31
-macsec:
+security:
   keychains:
     TEST-KEYCHAIN:
       key 1:
