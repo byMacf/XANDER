@@ -21,8 +21,12 @@
 set protocols ospf database-protection
 set protocols ospf maximum-lsa {{protocols.ospf.maximum_lsa}}
     {% endif %}
-set protocols ospf import {{protocols.ospf.import}}
-set protocols ospf export {{protocols.ospf.export}}
+    {% if protocols.ospf.import -%}
+        set protocols ospf import {{protocols.ospf.import}}
+    {% endif %}
+    {% if protocols.ospf.export -%}
+        set protocols ospf export {{protocols.ospf.export}}
+    {% endif %}
     {% for area, area_config in protocols.ospf.areas.items() %}
         {% if area_config['maximum-lsa'] -%}
             set protocols ospf area {{area}} maximum-lsa {{area_config['maximum-lsa']}}
@@ -73,8 +77,12 @@ set routing-instances {{vrf}} router-id {{vrf_config['router-id']}}
 set routing-instances {{vrf}} protocols ospf database-protection
 set routing-instances {{vrf}} protocols ospf maximum-lsa {{vrf_config.ospf.maximum_lsa}}
             {% endif %}
-set routing-instances {{vrf}} protocols ospf import {{protocols.ospf.import}}
-set routing-instances {{vrf}} protocols ospf export {{protocols.ospf.export}}
+            {% if vrf_config.ospf.import -%}
+                set routing-instances {{vrf}} protocols ospf import {{vrf_config.ospf.import}}
+            {% endif %}
+            {% if vrf_config.ospf.export -%}
+                set routing-instances {{vrf}} protocols ospf export {{vrf_config.ospf.export}}
+            {% endif %}
             {% for area, area_config in vrf_config.ospf.areas.items() %}
                 {% for interface, interface_config in area_config.interfaces.items() %}
                     {% if interface_config['passive'] == True -%}
