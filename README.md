@@ -16,10 +16,11 @@ A modular network device configuration builder.
     -s / --section - defaults to all if not specified
         available sections:
             * all
-            * acls
+            * access
             * interfaces
-            * macsec
             * policies
-            * routing
+            * protocols
+            * security
             * system
+            * vlans
 ```
