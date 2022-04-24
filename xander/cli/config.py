@@ -34,6 +34,9 @@ def build(device, vendor, section):
 		with open(ROOT_DIR + '/xander/configs/' + device + '_' + section + '.txt', 'w') as built_config_file:
 			built_config_file.write(built_config)
 	else:
+		if os.path.exists(ROOT_DIR + '/xander/configs/' + device + '_all.txt'):
+			os.remove(ROOT_DIR + '/xander/configs/' + device + '_all.txt')
+
 		for section in section_list:
 			template = template_path.get_template(section + '.j2')
 			built_config = template.render(device_vars)
