@@ -2,7 +2,60 @@
     {% if system.hostname -%}
         set system host-name {{system.hostname}}
     {% endif %}
-    {% if system.ntp_server -%}
-        set system ntp server {{system.ntp_server}}
+    {% if system.ntp_servers %}
+        {% for server in system.ntp_servers -%}
+            set system ntp server {{server}}
+        {% endfor %}
+    {% endif %}
+    {% if system.domain_name -%}
+        set system domain-name {{system.domain_name}}
+    {% endif %}
+    {% if system.time_zone -%}
+        set system time-zone {{system.time_zone}}
+    {% endif %}
+    {% if system.authentication_order -%}
+        set system authentication-order {{system.authentication_order}}
+    {% endif %}
+    {% if system.root_authentication_password -%}
+        set system root-authentication plain-text-password {{system.root_authentication_password}}
+    {% endif %}
+    {% if system.tacacs_servers -%}
+        {% for server, server_config in system.tacacs_servers.items() -%}
+            set system tacplus-server {{server}} secret {{server_config['secret']}}
+            {% for option in server_config.options -%}
+                set system tacplus-server {{server}} {{option}}
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+    {% if system.login -%}
+        set login message "{{system.login.message}}"
+        {% if system.login.classes %}
+            {% for class, class_config in system.login.classes.items() %}
+                {% for option in class_config['options'] -%}
+                    set system login class {{class}} {{option}}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+        {% if system.login.users %}
+            {% for user, user_config in system.login.users.items() %}
+                {% for option in user_config['options'] -%}
+                    set system login user {{user}} {{option}}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+    {% if system.services %}
+        {% if system.services.ssh %}
+            {% for option in system.services.ssh.options -%}
+                set system services ssh {{option}}
+            {% endfor %}
+        {% endif %}
+        {% if system.services.netconf %}
+            {% for protocol, protocol_config in system.services.netconf.items() %}
+                {% for option in protocol_config.options -%}
+                    set system services netconf {{protocol}} {{option}}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
     {% endif %}
 {% endif %}

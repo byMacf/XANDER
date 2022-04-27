@@ -1,6 +1,6 @@
 system:
   hostname: access-r1
-  ntp_server: x.x.x.x/32
+  ntp_servers: ['x.x.x.x/32']
 protocols: 
   ospf:
     areas:

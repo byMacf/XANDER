@@ -92,3 +92,25 @@ set security macsec interfaces et-0/0/0 connectivity-association TEST-WAN
 set security macsec interfaces et-0/0/1 connectivity-association TEST-WAN
 set system host-name backbone-r1
 set system ntp server x.x.x.x/32
+set system ntp server x.x.x.x/32
+set system domain-name test.com
+set system time-zone UTC
+set system authentication-order tacplus local
+set system root-authentication plain-text-password TEST-PASSWORD
+set system tacplus-server 10.10.10.10 secret TEST-SECRET
+set system tacplus-server 10.10.10.10 timeout 2
+set system tacplus-server 10.10.10.10 single-connection
+set system tacplus-server 11.11.11.11 secret TEST-SECRET
+set system tacplus-server 11.11.11.11 timeout 2
+set system tacplus-server 11.11.11.11 single-connection
+set login message "LOGIN MESSAGE"
+set system login class admin-access idle-timeout 10
+set system login class admin-access permissions all
+set system login user neteng class super-user
+set system login user neteng authentication plain-text-password TEST-PASSWORD
+set system services ssh root-login deny
+set system services ssh protocol-version v2
+set system services ssh connection-limit 40
+set system services ssh rate-limit 40
+set system services netconf ssh connection-limit 20
+set system services netconf ssh rate-limit 40

@@ -1,6 +1,31 @@
 system:
   hostname: backbone-r1
-  ntp_server: x.x.x.x/32
+  ntp_servers: ['x.x.x.x/32', 'x.x.x.x/32']
+  domain_name: test.com
+  time_zone: UTC
+  authentication_order: tacplus local
+  root_authentication_password: TEST-PASSWORD
+  tacacs_servers:
+    10.10.10.10:
+      secret: TEST-SECRET
+      options: ['timeout 2', 'single-connection']
+    11.11.11.11:
+      secret: TEST-SECRET
+      options: ['timeout 2', 'single-connection']
+  login:
+    message: LOGIN MESSAGE
+    classes:
+      admin-access:
+        options: ['idle-timeout 10', 'permissions all']
+    users:
+      neteng:
+        options: ['class super-user', 'authentication plain-text-password TEST-PASSWORD']
+  services:
+    ssh:
+      options: ['root-login deny', 'protocol-version v2', 'connection-limit 40', 'rate-limit 40']
+    netconf:
+      ssh: 
+        options: ['connection-limit 20', 'rate-limit 40']
 protocols: 
   bgp:
     asn: 65100
