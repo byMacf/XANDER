@@ -1,12 +1,24 @@
 {% if interfaces %}
     {% for interface_name, interface_config in interfaces.items() -%}
+        {% if interface_config['family'] and interface_config['ip_address'] -%}
         set interfaces {{interface_name}} family {{interface_config['family']}} address {{interface_config['ip_address']}}
+        {% endif %}
         {% if interface_config['mtu'] -%}
             set interfaces {{interface_name}} family {{interface_config['family']}} mtu {{interface_config['mtu']}}
         {% endif -%}
+        {% if interface_config['description'] -%}
         set interfaces {{interface_name}} description '{{interface_config['description']}}'
+        {% endif %}
         {% if interface_config['mpls'] -%}
             set interfaces {{interface_name}} family mpls
+        {% endif %}
+        {% if interface_config['lacp'] -%}
+            set interfaces {{interface_name}} ether-options 802.3ad {{interface_config['lacp']}}
+        {% endif %}
+        {% if interface_name in ['ae'] -%}
+            {% for option in interface_config.options %}
+                set interfaces aggregated-ether-options lacp {{option}}
+            {% endfor %}
         {% endif %}
     {% endfor %}
 {% endif %}

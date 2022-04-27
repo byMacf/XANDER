@@ -7,3 +7,7 @@ set interfaces xe-0/0/0.0 family inet mtu 9192
 set interfaces xe-0/0/0.0 description 'test1'
 set interfaces et-0/0/0.0 family inet address 192.168.2.1/31
 set interfaces et-0/0/0.0 description 'test2'
+set interfaces et-0/0/50.0 ether-options 802.3ad ae1
+set interfaces et-0/0/51.0 ether-options 802.3ad ae1
+set interfaces ae1.0 family inet address x.x.x.x/31
+set interfaces ae1.0 description 'Crosslink'

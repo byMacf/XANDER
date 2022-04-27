@@ -118,6 +118,15 @@ interfaces:
     description: test2
     family: inet
     ip_address: 192.168.2.1/31
+  et-0/0/50.0:
+    lacp: ae1
+  et-0/0/51.0:
+    lacp: ae1
+  ae1.0:
+    description: Crosslink
+    family: inet
+    ip_address: x.x.x.x/31
+    options: ['periodic fast', 'active']
 security:
   keychains:
     TEST-KEYCHAIN:
