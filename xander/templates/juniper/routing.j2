@@ -131,3 +131,10 @@ set routing-instances {{vrf}} protocols ospf maximum-lsa {{vrf_config.ospf.maxim
         {% endfor %}
     {% endfor %}
 {% endif %}
+{% if routing_options %}
+    {% for route_type, route in routing_options.items() %}
+        {% for route_name, route_options in route.items() -%}
+            set routing-options {{route_type}} route {{route_name}} {% for option in route_options.options %}{{option}} {% endfor +%}
+        {% endfor %}
+    {% endfor %}
+{% endif %}

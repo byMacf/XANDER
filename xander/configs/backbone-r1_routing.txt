@@ -57,3 +57,5 @@ set routing-instances TEST-VRF protocols bgp FW neighbor 172.17.1.1 description 
 set routing-instances TEST-VRF protocols bgp FW neighbor 172.17.1.1 authentication-key KEY-R2
 set routing-instances TEST-VRF protocols bgp FW neighbor 172.17.1.2 description backbone-r3
 set routing-instances TEST-VRF protocols bgp FW neighbor 172.17.1.2 authentication-key KEY-R3
+set routing-options static route 0.0.0.0/0 discard no-install 
+set routing-options static route 192.168.1.30/30 next-hop et-0/0/48 

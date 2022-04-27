@@ -94,6 +94,12 @@ vrfs:
               metric: 100
               authentication-key: KEY-2
           maximum-lsa: 10000
+routing_options: 
+  static:
+    0.0.0.0/0:
+      options: ['discard', 'no-install']
+    192.168.1.30/30:
+      options: ['next-hop', et-0/0/48]
 interfaces: 
   lo0.0:
     description: loopback

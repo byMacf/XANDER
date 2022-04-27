@@ -29,5 +29,6 @@ set protocols dot1x authenticator interface ge-0/0/42.0 server-timeout 30
 set protocols dot1x authenticator interface ge-0/0/42.0 maximum-requests 3
 set protocols dot1x authenticator interface ge-0/0/42.0 server-fail deny
 set system host-name access-r1
-set system ntp server set vlans test-vlan vlan-id 88
+set system ntp server x.x.x.x/32
+set vlans test-vlan vlan-id 88
 set vlans test-vlan l3-interface irb.88
