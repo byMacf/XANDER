@@ -58,4 +58,14 @@
             {% endfor %}
         {% endif %}
     {% endif %}
+    {% if system.snmp -%}
+        set snmp trap-options source-address {{system.snmp.source_address}}
+        {% for snmp_user, snmp_user_config in system.snmp.v3.users.items() -%}
+set snmp v3 usm local-engine user {{snmp_user}} authentication-sha authentication-password {{snmp_user_config.authkey}}
+set snmp v3 usm local-engine user {{snmp_user}} privacy-aes128 privacy-password {{snmp_user_config.privkey}}
+set snmp vacm security-to-group security-model usm security-name {{snmp_user}} group {{snmp_user_config.group}}
+set snmp vacm access group {{snmp_user_config.group}} default-context-prefix security-model usm security-level privacy read-view view-all
+set snmp vacm access group {{snmp_user_config.group}} default-context-prefix security-model usm security-level privacy notify-view view-all
+        {% endfor %}
+    {% endif %}
 {% endif %}

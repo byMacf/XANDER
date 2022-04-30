@@ -26,6 +26,14 @@ system:
     netconf:
       ssh: 
         options: ['connection-limit 20', 'rate-limit 40']
+  snmp:
+    source_address: 8.8.8.8/32
+    v3:
+      users:
+        snmp-user:
+          authkey: TEST-KEY
+          privkey: TEST-KEY
+          group: view-all
 protocols: 
   bgp:
     asn: 65100

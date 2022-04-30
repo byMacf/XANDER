@@ -22,3 +22,9 @@ set system services ssh connection-limit 40
 set system services ssh rate-limit 40
 set system services netconf ssh connection-limit 20
 set system services netconf ssh rate-limit 40
+set snmp trap-options source-address 8.8.8.8/32
+set snmp v3 usm local-engine user snmp-user authentication-sha authentication-password TEST-KEY
+set snmp v3 usm local-engine user snmp-user privacy-aes128 privacy-password TEST-KEY
+set snmp vacm security-to-group security-model usm security-name snmp-user group view-all
+set snmp vacm access group view-all default-context-prefix security-model usm security-level privacy read-view view-all
+set snmp vacm access group view-all default-context-prefix security-model usm security-level privacy notify-view view-all
