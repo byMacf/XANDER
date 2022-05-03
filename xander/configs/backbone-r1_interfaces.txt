@@ -1,3 +1,6 @@
+set interfaces gr-0/0/0.112 description 'GRE Test'
+set interfaces gr-0/0/0.112 tunnel source 1.1.1.1
+set interfaces gr-0/0/0.112 tunnel destination 2.2.2.2
 set interfaces lo0.0 family inet address 8.8.8.8/32
 set interfaces lo0.0 description 'loopback'
 set interfaces lo0.10 family inet address 9.9.9.9/32
@@ -11,3 +14,5 @@ set interfaces et-0/0/50.0 ether-options 802.3ad ae1
 set interfaces et-0/0/51.0 ether-options 802.3ad ae1
 set interfaces ae1.0 family inet address x.x.x.x/31
 set interfaces ae1.0 description 'Crosslink'
+set interfaces ae1 aggregated-ether-options lacp periodic fast
+set interfaces ae1 aggregated-ether-options lacp active

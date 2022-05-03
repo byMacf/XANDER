@@ -134,6 +134,10 @@ routing_options:
     192.168.1.30/30:
       options: ['next-hop', et-0/0/48]
 interfaces: 
+  gr-0/0/0.112:
+    description: GRE Test
+    source: 1.1.1.1
+    destination: 2.2.2.2
   lo0.0:
     description: loopback
     family: inet
