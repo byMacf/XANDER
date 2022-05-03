@@ -47,6 +47,12 @@ interfaces:
     description: Test VLAN
     family: inet
     ip_address: 192.168.18.254/24
+    input_filter: INPUT-FILTER
+    output_filter: OUTPUT-FILTER
+  ge-0/0/1.0:
+    description: Workstation 1
+    family: ethernet-switching
+    vlan: TEST
 vlans:
   test-vlan:
     vlan-id: 88

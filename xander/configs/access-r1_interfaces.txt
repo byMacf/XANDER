@@ -7,3 +7,7 @@ set interfaces et-0/0/0.0 family inet address 192.168.2.1/31
 set interfaces et-0/0/0.0 description 'test2'
 set interfaces irb.88 family inet address 192.168.18.254/24
 set interfaces irb.88 description 'Test VLAN'
+set interfaces irb.88 family inet filter input INPUT-FILTER
+set interfaces irb.88 family inet filter output OUTPUT-FILTER
+set interfaces ge-0/0/1.0 family ethernet-switching vlan members TEST
+set interfaces ge-0/0/1.0 description 'Workstation 1'

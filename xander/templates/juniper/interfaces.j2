@@ -1,13 +1,15 @@
 {% if interfaces %}
     {% for interface_name, interface_config in interfaces.items() -%}
         {% if interface_config['family'] and interface_config['ip_address'] -%}
-        set interfaces {{interface_name}} family {{interface_config['family']}} address {{interface_config['ip_address']}}
+            set interfaces {{interface_name}} family {{interface_config['family']}} address {{interface_config['ip_address']}}
+        {% elif interface_config['family'] == 'ethernet-switching' -%}
+            set interfaces {{interface_name}} family {{interface_config['family']}} vlan members {{interface_config['vlan']}}
         {% endif %}
         {% if interface_config['mtu'] -%}
             set interfaces {{interface_name}} family {{interface_config['family']}} mtu {{interface_config['mtu']}}
-        {% endif -%}
+        {% endif %}
         {% if interface_config['description'] -%}
-        set interfaces {{interface_name}} description '{{interface_config['description']}}'
+            set interfaces {{interface_name}} description '{{interface_config['description']}}'
         {% endif %}
         {% if interface_config['mpls'] -%}
             set interfaces {{interface_name}} family mpls
@@ -23,6 +25,12 @@
         {% if 'gr' in interface_name -%}
 set interfaces {{interface_name}} tunnel source {{interface_config['source']}}
 set interfaces {{interface_name}} tunnel destination {{interface_config['destination']}}
+        {% endif %}
+        {% if interface_config['input_filter']  -%}
+            set interfaces {{interface_name}} family {{interface_config['family']}} filter input {{interface_config['input_filter']}}
+        {% endif %}
+        {% if interface_config['output_filter']  -%}
+            set interfaces {{interface_name}} family {{interface_config['family']}} filter output {{interface_config['output_filter']}}
         {% endif %}
     {% endfor %}
 {% endif %}
