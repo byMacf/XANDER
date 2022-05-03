@@ -1,0 +1,14 @@
+{% if firewall %}
+    {% for firewall_filter, firewall_filter_terms in firewall.items() -%}
+        {% for firewall_filter_term, firewall_filter_config in firewall_filter_terms.items() %}
+            {% if firewall_filter_config.from %}
+                {% for from_item in firewall_filter_config.from -%}
+                    set firewall filter {{firewall_filter}} term {{firewall_filter_term}} from {{from_item}}
+                {% endfor %}
+            {% endif %}
+            {% for then_item in firewall_filter_config.then -%}
+                set firewall filter {{firewall_filter}} term {{firewall_filter_term}} then {{then_item}}
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+{% endif %}

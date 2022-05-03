@@ -1,3 +1,8 @@
+set firewall filter TEST-FILTER1 term TERM1 from source-prefix-list PREFIX-LIST-1
+set firewall filter TEST-FILTER1 term TERM1 from destination-prefix-list PREFIX-LIST-2
+set firewall filter TEST-FILTER1 term TERM1 then accept
+set firewall filter TEST-FILTER1 term DENY-ALL then count DENY-ALL
+set firewall filter TEST-FILTER1 term DENY-ALL then discard
 set interfaces gr-0/0/0.112 family inet address 192.168.35.1/30
 set interfaces gr-0/0/0.112 description 'GRE Test'
 set interfaces gr-0/0/0.112 tunnel source 1.1.1.1
@@ -24,6 +29,7 @@ set policy-options policy-statement TEST-POLICY1 term DENY-ALL then reject
 set policy-options community COMM-1 members 64901:500
 set policy-options community COMM-2 members 64901:250
 set policy-options prefix-list PREFIX-LIST-1 16.16.16.16/29 17.17.17.17/29 18.18.18.18/29 
+set policy-options prefix-list PREFIX-LIST-2 20.20.20.20/29 21.21.21.21/29 22.22.22.22/29 
 set routing-options autonomous-system 65100
 set protocols bgp IBGP-RR-PEERS type internal
 set protocols bgp IBGP-RR-PEERS description Test-Peers

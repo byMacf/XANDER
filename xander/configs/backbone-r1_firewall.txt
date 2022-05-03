@@ -1,0 +1,5 @@
+set firewall filter TEST-FILTER1 term TERM1 from source-prefix-list PREFIX-LIST-1
+set firewall filter TEST-FILTER1 term TERM1 from destination-prefix-list PREFIX-LIST-2
+set firewall filter TEST-FILTER1 term TERM1 then accept
+set firewall filter TEST-FILTER1 term DENY-ALL then count DENY-ALL
+set firewall filter TEST-FILTER1 term DENY-ALL then discard

@@ -196,3 +196,11 @@ policies:
     COMM-2: 64901:250
   prefix_lists:
     PREFIX-LIST-1: ['16.16.16.16/29', '17.17.17.17/29', '18.18.18.18/29']
+    PREFIX-LIST-2: ['20.20.20.20/29', '21.21.21.21/29', '22.22.22.22/29']
+firewall:
+  TEST-FILTER1:
+    TERM1: 
+      from: ['source-prefix-list PREFIX-LIST-1', 'destination-prefix-list PREFIX-LIST-2']
+      then: ['accept']
+    DENY-ALL: 
+      then: ['count DENY-ALL', 'discard']
