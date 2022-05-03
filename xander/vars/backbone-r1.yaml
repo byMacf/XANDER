@@ -138,6 +138,8 @@ interfaces:
     description: GRE Test
     source: 1.1.1.1
     destination: 2.2.2.2
+    family: inet
+    ip_address: 192.168.35.1/30
   lo0.0:
     description: loopback
     family: inet
