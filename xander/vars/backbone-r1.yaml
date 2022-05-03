@@ -194,3 +194,5 @@ policies:
   communities:
     COMM-1: 64901:500
     COMM-2: 64901:250
+  prefix_lists:
+    PREFIX-LIST-1: ['16.16.16.16/29', '17.17.17.17/29', '18.18.18.18/29']

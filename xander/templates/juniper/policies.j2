@@ -14,4 +14,7 @@
     {% for community_name, community in policies.communities.items() -%}
         set policy-options community {{community_name}} members {{community}}
     {% endfor %}
+    {% for prefix_list, prefix_list_addresses in policies.prefix_lists.items() -%}
+        set policy-options prefix-list {{prefix_list}} {% for address in prefix_list_addresses %}{{address}} {% endfor +%}
+    {% endfor %}
 {% endif %}
