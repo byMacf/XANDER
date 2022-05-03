@@ -17,9 +17,10 @@ A modular network device configuration builder.
         available sections:
             * all
             * access
+            * firewall
             * interfaces
             * policies
-            * protocols
+            * routing
             * security
             * system
             * vlans
